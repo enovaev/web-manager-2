@@ -13,10 +13,11 @@ const menuLinks = [
   }
 ];
 
-interface PropsMenuItems {
+interface   PropsMenuItems {
   closeSidebar: () => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const MenuItems: FC<PropsMenuItems> = ({ closeSidebar }) => (
   <Menu defaultSelectedKeys={['/']} mode="vertical">
     {menuLinks.map(({ to, label }) => (

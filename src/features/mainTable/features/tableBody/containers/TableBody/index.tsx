@@ -10,6 +10,7 @@ export const TableBody: FC<{}> = () => {
   return (
     <tbody>
       {list.map((_, i: number) => (
+        // eslint-disable-next-line react/no-array-index-key
         <tr key={i}>
           {mainTableConfig.map(({ name }) => (
             <td key={name}>
@@ -18,6 +19,7 @@ export const TableBody: FC<{}> = () => {
                   { Component, defaultProps }: ComponentEntity,
                   index: number
                 ) => (
+                  // eslint-disable-next-line react/no-array-index-key
                   <Component key={index} {...defaultProps} />
                 )
               )}

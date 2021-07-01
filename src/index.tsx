@@ -8,7 +8,7 @@ import { AppPages } from './pages';
 const rootElement = document.getElementById('root-app');
 
 render(
-  <Provider  store={store}>
+  <Provider store={store}>
     <Router>
       <AppPages />
     </Router>
