@@ -69,6 +69,10 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,ts,tsx,jsx}": ["eslint", "pretty-quick — staged", "git add"]
+    "src/**/*.{js,ts,tsx,jsx}": [
+      "npm run lint",
+      "pretty-quick — staged",
+      "git add"
+    ]
   }
 }
