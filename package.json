@@ -1,12 +1,14 @@
 {
-  "name": "web-manager-frontend",
+  "name": "web-manager-client",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
     "dev": "cross-env NODE_ENV=development webpack serve --mode=development --hot",
-    "build": "webpack --mode=development"
+    "build": "webpack --mode=development",
+    "format": "prettier --write \"src/**/*.{ts,js,tsx,jsx}\"",
+    "lint": "eslint --fix \"src/**/*.{ts,js,tsx,jsx}\""
   },
   "author": "",
   "license": "ISC",
@@ -36,9 +38,11 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "husky": "^7.0.0",
     "jest": "^27.0.4",
     "less-loader": "^10.0.0",
     "prettier": "^2.3.1",
+    "pretty-quick": "^3.1.1",
     "style-loader": "^2.0.0",
     "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
@@ -58,5 +62,10 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --check"
+    }
   }
 }
