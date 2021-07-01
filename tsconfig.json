@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["DOM", "ES2020"],
+    "module": "esnext",
+    "outDir": "./dist",
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "features": ["./features"],
+      "store": ["./store"],
+      "shared": ["./shared"],
+      "styles": ["./styles"]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "webpack.config.js",
+    "jest.config.js"
+  ],
+  "exclude": ["node_modules"]
+}

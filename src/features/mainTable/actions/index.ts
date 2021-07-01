@@ -1,0 +1,1 @@
+export { addPosition } from './entityActions';

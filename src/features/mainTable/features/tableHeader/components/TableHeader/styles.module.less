@@ -1,0 +1,33 @@
+@import "~styles/mixins";
+
+.headerRow {
+  background-color: rgb(250, 250, 250);
+
+  .headerCell {
+    position: relative;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: start;
+
+    &:before {
+      .absoluteCenterPosition;
+
+      left: 100%;
+      content: '';
+      width: 1px;
+      height: 1.6em;
+      background-color: #f0f0f0;
+    }
+
+    &:first-child {
+      border-top-left-radius: 4px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 4px;
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
