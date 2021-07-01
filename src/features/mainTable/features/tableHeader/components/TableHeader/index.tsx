@@ -6,7 +6,6 @@ import { mainTableConfig } from '../../../../config/mainTableConfig';
 
 import styles from './styles.module.less';
 
-// @ts-ignore
 export const TableHeader: FC<{}> = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useDispatch();
