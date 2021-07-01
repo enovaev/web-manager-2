@@ -7,7 +7,8 @@ export const componentController: ComponentControllerType = {
     components: [
       {
         Component: Checkbox,
-        defaultProps: {}
+        defaultProps: {},
+        propName: 'check'
       }
     ]
   },
@@ -15,7 +16,8 @@ export const componentController: ComponentControllerType = {
     components: [
       {
         Component: Input,
-        defaultProps: {}
+        defaultProps: {},
+        propName: 'partname'
       }
     ]
   },
@@ -23,7 +25,8 @@ export const componentController: ComponentControllerType = {
     components: [
       {
         Component: Input,
-        defaultProps: {}
+        defaultProps: {},
+        propName: 'option'
       }
     ]
   }

@@ -13,7 +13,7 @@ const menuLinks = [
   }
 ];
 
-interface  PropsMenuItems {
+interface PropsMenuItems {
   closeSidebar: () => void;
 }
 
