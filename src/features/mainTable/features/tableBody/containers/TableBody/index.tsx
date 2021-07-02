@@ -8,6 +8,8 @@ import {
   ComponentsProps
 } from '../../../../types/configTypes';
 
+import styles from './styles.module.less';
+
 export const TableBody: FC<{}> = () => {
   const dispatch = useDispatch();
   const { list } = useSelector(state => state.table);
@@ -26,7 +28,7 @@ export const TableBody: FC<{}> = () => {
         // eslint-disable-next-line react/no-array-index-key
         <tr key={entityIndex}>
           {mainTableConfig.map(({ name }) => (
-            <td key={name}>
+            <td key={name} className={styles.cellTable}>
               {componentController[name].components.map(
                 ({
                   Component,

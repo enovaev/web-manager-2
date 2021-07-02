@@ -9,7 +9,7 @@ export interface CheckboxProps {
 export const Checkbox: FC<CheckboxProps> = ({ onChange, value }) => {
   return (
     <AntdCheckbox
-      value={value}
+      checked={value}
       onChange={({ target }) => onChange(target.checked)}
     />
   );

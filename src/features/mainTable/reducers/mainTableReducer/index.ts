@@ -10,7 +10,8 @@ interface TableState {
 const initialPosition: EntityType = {
   check: false,
   partname: '',
-  option: ''
+  option: '',
+  tags: ['test', 'test1']
 };
 
 const initialState = {

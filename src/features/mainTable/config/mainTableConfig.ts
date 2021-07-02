@@ -12,5 +12,9 @@ export const mainTableConfig: MainTableConfigType = [
   {
     name: 'option',
     label: 'Option'
+  },
+  {
+    name: 'tags',
+    label: 'Tags'
   }
 ];
