@@ -7,6 +7,7 @@ export interface InputProps {
   type?: InputTypes;
   onChange: (value: string) => void;
   value: string;
+  defaultProps?: object;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

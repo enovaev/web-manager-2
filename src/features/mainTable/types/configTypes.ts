@@ -3,12 +3,17 @@ import { CheckboxProps } from '../components/Checkbox';
 import { InputProps } from '../components/Input';
 import { PropNamesType } from './reducerTypes';
 import { TagsProps } from '../components/Tags';
+import { SelectProps } from '../components/Select';
 
 // Типы пропсов для копмонентов которые мапим
-export type ComponentsProps = CheckboxProps | InputProps | TagsProps;
+export type ComponentsProps =
+  | CheckboxProps
+  | InputProps
+  | TagsProps
+  | SelectProps;
 
 // Типы названия колонок в таблице
-export type TableColumnsType = 'check' | 'partname' | 'option' | 'tags';
+export type TableColumnsType = 'check' | 'partname' | 'tags' | 'exw';
 
 export interface ComponentEntity<T> {
   Component: FunctionComponent<T>;

@@ -10,7 +10,8 @@ interface TableState {
 const initialPosition: EntityType = {
   check: false,
   partname: '',
-  option: '',
+  exw_value: '',
+  exw_currency: 'RUB',
   tags: ['test', 'test1']
 };
 

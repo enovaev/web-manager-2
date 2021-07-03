@@ -10,11 +10,11 @@ export const mainTableConfig: MainTableConfigType = [
     label: 'Partname'
   },
   {
-    name: 'option',
-    label: 'Option'
-  },
-  {
     name: 'tags',
     label: 'Tags'
+  },
+  {
+    name: 'exw',
+    label: 'ExW Price'
   }
 ];

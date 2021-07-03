@@ -1,4 +1,5 @@
 import React, { FC, useCallback } from 'react';
+import cx from 'classnames';
 import { useSelector, useDispatch } from 'shared/hooks/customReduxHooks';
 import { mainTableConfig } from '../../../../config/mainTableConfig';
 import { componentController } from '../../../../config/componentController';
@@ -25,24 +26,31 @@ export const TableBody: FC<{}> = () => {
   return (
     <tbody>
       {list.map((props, entityIndex: number) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <tr key={entityIndex}>
+        <tr
+          // eslint-disable-next-line react/no-array-index-key
+          key={entityIndex}
+          className={cx(styles.tableRow, {
+            [styles.checked]: props.check
+          })}
+        >
           {mainTableConfig.map(({ name }) => (
-            <td key={name} className={styles.cellTable}>
-              {componentController[name].components.map(
-                ({
-                  Component,
-                  defaultProps,
-                  propName
-                }: ComponentEntity<ComponentsProps>) => (
-                  <Component
-                    key={propName}
-                    value={props[propName]}
-                    onChange={changeAction(entityIndex, propName)}
-                    {...defaultProps}
-                  />
-                )
-              )}
+            <td key={name}>
+              <div className={styles.componentWrapper}>
+                {componentController[name].components.map(
+                  ({
+                    Component,
+                    defaultProps,
+                    propName
+                  }: ComponentEntity<ComponentsProps>) => (
+                    <Component
+                      key={propName}
+                      value={props[propName]}
+                      onChange={changeAction(entityIndex, propName)}
+                      defaultProps={defaultProps}
+                    />
+                  )
+                )}
+              </div>
             </td>
           ))}
         </tr>

@@ -3,6 +3,7 @@ import { Tag as AntdTag } from 'antd';
 
 export interface TagsProps {
   value: string[];
+  defaultProps?: object;
 }
 
 export const Tags: FC<TagsProps> = memo(
