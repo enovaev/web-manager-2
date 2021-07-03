@@ -4,6 +4,8 @@ import { Input as AntdInput } from 'antd';
 interface DefaultPropsInput {
   isNumber?: boolean;
   maxWidth?: number;
+  placeholder?: string;
+  bordered?: boolean;
 }
 
 export interface InputProps {
@@ -13,7 +15,8 @@ export interface InputProps {
 }
 
 export const Input: FC<InputProps> = ({ onChange, value, defaultProps }) => {
-  const { isNumber, maxWidth } = (defaultProps as DefaultPropsInput) || {};
+  const { isNumber, maxWidth, ...others } =
+    (defaultProps as DefaultPropsInput) || {};
 
   const handleOnChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (isNumber) {
@@ -24,6 +27,11 @@ export const Input: FC<InputProps> = ({ onChange, value, defaultProps }) => {
   };
 
   return (
-    <AntdInput value={value} onChange={handleOnChange} style={{ maxWidth }} />
+    <AntdInput
+      {...others}
+      value={value}
+      onChange={handleOnChange}
+      style={{ maxWidth }}
+    />
   );
 };

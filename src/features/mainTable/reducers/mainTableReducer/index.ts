@@ -1,6 +1,7 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  selectTag,
   addPosition,
   changeEntity,
   deleteEntity,
@@ -19,7 +20,7 @@ const initialPosition: EntityType = {
   quantity: '1',
   price_value: '',
   price_currency: 'RUB',
-  tags: ['test', 'test1']
+  tags: []
 };
 
 const initialState = {
@@ -41,5 +42,10 @@ export const mainTableReducer = createReducer(initialState, builder => {
     })
     .addCase(deleteEntity, (state, { payload }) => {
       state.list = state.list.filter((_, i) => i !== payload);
+    })
+    .addCase(selectTag, (state, { payload }) => {
+      state.list = state.list.map(pos =>
+        pos.check ? { ...pos, tags: [...pos.tags, payload] } : pos
+      );
     });
 });

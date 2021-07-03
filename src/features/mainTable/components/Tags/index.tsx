@@ -1,5 +1,7 @@
 import React, { FC, memo } from 'react';
+import { useSelector } from 'shared/hooks/customReduxHooks';
 import { Tag as AntdTag } from 'antd';
+import { getTagList } from 'features/tableSettings';
 
 export interface TagsProps {
   value: string[];
@@ -7,15 +9,19 @@ export interface TagsProps {
 }
 
 export const Tags: FC<TagsProps> = memo(
-  ({ value }) => (
-    <div style={{ maxWidth: '300' }}>
-      {value.map(tag => (
-        <AntdTag color="geekblue" key={tag}>
-          {tag.toUpperCase()}
-        </AntdTag>
-      ))}
-    </div>
-  ),
+  ({ value }) => {
+    const tagList = useSelector(getTagList);
+
+    return (
+      <div>
+        {value.map(id => (
+          <AntdTag color={tagList[id].color} key={id}>
+            {tagList[id].name.toUpperCase()}
+          </AntdTag>
+        ))}
+      </div>
+    );
+  },
   ({ value: valuePrev }, { value: valueNext }) => {
     return valuePrev.toString() === valueNext.toString();
   }

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { mainTableReducer } from 'features/mainTable';
+import { tableSettingsReducer } from 'features/tableSettings';
 
 export const store = configureStore({
   reducer: {
-    table: mainTableReducer
+    table: mainTableReducer,
+    tableSettings: tableSettingsReducer
   }
 });
 
