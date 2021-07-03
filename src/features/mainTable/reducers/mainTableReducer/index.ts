@@ -3,6 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   addPosition,
   changeEntity,
+  deleteEntity,
   checkAllEntities
 } from '../../actions/entityActions';
 import { EntityType } from '../../types/reducerTypes';
@@ -14,8 +15,10 @@ interface TableState {
 const initialPosition: EntityType = {
   check: false,
   partname: '',
-  exw_value: '',
-  exw_currency: 'RUB',
+  name: '',
+  quantity: '1',
+  price_value: '',
+  price_currency: 'RUB',
   tags: ['test', 'test1']
 };
 
@@ -35,5 +38,8 @@ export const mainTableReducer = createReducer(initialState, builder => {
     })
     .addCase(checkAllEntities, (state, { payload }) => {
       state.list = state.list.map(pos => ({ ...pos, check: payload }));
+    })
+    .addCase(deleteEntity, (state, { payload }) => {
+      state.list = state.list.filter((_, i) => i !== payload);
     });
 });

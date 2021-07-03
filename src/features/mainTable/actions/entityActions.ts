@@ -14,3 +14,5 @@ export const changeEntity = createAction(
 );
 
 export const checkAllEntities = createAction<boolean>('table/checkAllEntities');
+
+export const deleteEntity = createAction<number>('table/deleteEntity');

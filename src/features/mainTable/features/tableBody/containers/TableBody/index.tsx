@@ -3,6 +3,7 @@ import cx from 'classnames';
 import { useSelector, useDispatch } from 'shared/hooks/customReduxHooks';
 import { mainTableConfig } from '../../../../config/mainTableConfig';
 import { componentController } from '../../../../config/componentController';
+import { DeletePosition } from '../../../../containers/DeletePosition';
 import { changeEntity } from '../../../../actions/entityActions';
 import {
   ComponentEntity,
@@ -22,7 +23,6 @@ export const TableBody: FC<{}> = () => {
     []
   );
 
-  // @ts-ignore
   return (
     <tbody>
       {list.map((props, entityIndex: number) => (
@@ -36,7 +36,7 @@ export const TableBody: FC<{}> = () => {
           {mainTableConfig.map(({ name }) => (
             <td key={name}>
               <div className={styles.componentWrapper}>
-                {componentController[name].components.map(
+                {componentController[name]?.components?.map(
                   ({
                     Component,
                     defaultProps,
@@ -50,6 +50,8 @@ export const TableBody: FC<{}> = () => {
                     />
                   )
                 )}
+                {name === 'action' && <DeletePosition index={entityIndex} />}
+                {name === 'number' && entityIndex + 1}
               </div>
             </td>
           ))}

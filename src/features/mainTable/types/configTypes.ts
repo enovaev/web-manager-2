@@ -13,11 +13,20 @@ export type ComponentsProps =
   | SelectProps;
 
 // Типы названия колонок в таблице
-export type TableColumnsType = 'check' | 'partname' | 'tags' | 'exw';
+export type TableColumnsType =
+  | 'check'
+  | 'number'
+  | 'partname'
+  | 'name'
+  | 'tags'
+  | 'price'
+  | 'quantity'
+  | 'action';
 
 export interface ComponentEntity<T> {
   Component: FunctionComponent<T>;
   defaultProps: object;
+  isCustom?: boolean;
   propName: PropNamesType;
 }
 
@@ -25,9 +34,8 @@ interface ComponentControllerCellConfig {
   components: ComponentEntity<any>[];
 }
 
-export type ComponentControllerType = Record<
-  TableColumnsType,
-  ComponentControllerCellConfig
+export type ComponentControllerType = Partial<
+  Record<TableColumnsType, ComponentControllerCellConfig>
 >;
 
 interface MainConfigCell {

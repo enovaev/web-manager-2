@@ -1,16 +1,29 @@
-import React, { FC } from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import { Input as AntdInput } from 'antd';
 
-type InputTypes = 'number' | 'string';
+interface DefaultPropsInput {
+  isNumber?: boolean;
+  maxWidth?: number;
+}
 
 export interface InputProps {
-  type?: InputTypes;
   onChange: (value: string) => void;
   value: string;
   defaultProps?: object;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Input: FC<InputProps> = ({ type = 'string', onChange, value }) => (
-  <AntdInput value={value} onChange={({ target }) => onChange(target.value)} />
-);
+export const Input: FC<InputProps> = ({ onChange, value, defaultProps }) => {
+  const { isNumber, maxWidth } = (defaultProps as DefaultPropsInput) || {};
+
+  const handleOnChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    if (isNumber) {
+      if (Number(target.value) || !target.value) onChange(target.value);
+    } else {
+      onChange(target.value);
+    }
+  };
+
+  return (
+    <AntdInput value={value} onChange={handleOnChange} style={{ maxWidth }} />
+  );
+};

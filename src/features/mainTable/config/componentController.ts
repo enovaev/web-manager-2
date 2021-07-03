@@ -24,6 +24,15 @@ export const componentController: ComponentControllerType = {
       }
     ]
   },
+  name: {
+    components: [
+      {
+        Component: Input,
+        defaultProps: {},
+        propName: 'name'
+      }
+    ]
+  },
   tags: {
     components: [
       {
@@ -33,19 +42,33 @@ export const componentController: ComponentControllerType = {
       }
     ]
   },
-  exw: {
+  price: {
     components: [
       {
         Component: Input,
-        defaultProps: {},
-        propName: 'exw_value'
+        defaultProps: {
+          isNumber: true
+        },
+        propName: 'price_value'
       },
       {
         Component: Select,
         defaultProps: {
           items: currencyItems
         },
-        propName: 'exw_currency'
+        propName: 'price_currency'
+      }
+    ]
+  },
+  quantity: {
+    components: [
+      {
+        Component: Input,
+        defaultProps: {
+          isNumber: true,
+          maxWidth: 70
+        },
+        propName: 'quantity'
       }
     ]
   }

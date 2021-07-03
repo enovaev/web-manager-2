@@ -6,15 +6,31 @@ export const mainTableConfig: MainTableConfigType = [
     componentName: 'checkAll'
   },
   {
+    name: 'number',
+    label: '№'
+  },
+  {
     name: 'partname',
     label: 'Partname'
+  },
+  {
+    name: 'name',
+    label: 'Position name'
   },
   {
     name: 'tags',
     label: 'Tags'
   },
   {
-    name: 'exw',
+    name: 'price',
     label: 'ExW Price'
+  },
+  {
+    name: 'quantity',
+    label: 'Quantity'
+  },
+  {
+    name: 'action',
+    componentName: 'addPosition'
   }
 ];

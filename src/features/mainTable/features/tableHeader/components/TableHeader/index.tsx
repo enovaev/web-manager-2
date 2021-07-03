@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'shared/hooks/customReduxHooks';
-import { addPosition } from 'features/mainTable/actions/entityActions';
 import { mainTableConfig } from '../../../../config/mainTableConfig';
 import {
   componentMap,
@@ -10,8 +8,6 @@ import {
 import styles from './styles.module.less';
 
 export const TableHeader: FC<{}> = () => {
-  const dispatch = useDispatch();
-
   return (
     <thead>
       <tr className={styles.headerRow}>
@@ -22,8 +18,6 @@ export const TableHeader: FC<{}> = () => {
 
           return (
             <th className={styles.headerCell} key={name}>
-              {/* eslint-disable-next-line react/button-has-type */}
-              <button onClick={() => dispatch(addPosition())}>click</button>
               {label}
               {Component && <Component />}
             </th>
