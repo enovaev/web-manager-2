@@ -3,7 +3,7 @@ import { MainTableConfigType } from '../types/configTypes';
 export const mainTableConfig: MainTableConfigType = [
   {
     name: 'check',
-    label: 'CheckBox'
+    componentName: 'checkAll'
   },
   {
     name: 'partname',

@@ -32,7 +32,8 @@ export type ComponentControllerType = Record<
 
 interface MainConfigCell {
   name: TableColumnsType;
-  label: string;
+  label?: string;
+  componentName?: string;
 }
 
 export type MainTableConfigType = MainConfigCell[];

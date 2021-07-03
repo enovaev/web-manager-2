@@ -1,6 +1,10 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
-import { addPosition, changeEntity } from '../../actions/entityActions';
+import {
+  addPosition,
+  changeEntity,
+  checkAllEntities
+} from '../../actions/entityActions';
 import { EntityType } from '../../types/reducerTypes';
 
 interface TableState {
@@ -28,5 +32,8 @@ export const mainTableReducer = createReducer(initialState, builder => {
       const { index, propName, value } = payload;
 
       state.list[index] = { ...state.list[index], [propName]: value };
+    })
+    .addCase(checkAllEntities, (state, { payload }) => {
+      state.list = state.list.map(pos => ({ ...pos, check: payload }));
     });
 });
