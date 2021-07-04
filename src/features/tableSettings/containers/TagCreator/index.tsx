@@ -3,17 +3,21 @@ import { v4 as genId } from 'uuid';
 import { useSelector, useDispatch } from 'shared/hooks/customReduxHooks';
 import { Popover } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
-import { getOnlyCheckedPositions, selectTag } from 'features/mainTable';
+import { getOnlyCheckedPositions, selectTags } from 'features/mainTable';
 import { CreateTagForm } from '../../components/CreateTagForm';
-import { createTag } from '../../actions/tagActions';
-import { getChooseColors } from '../../reducers/mainTableSettingsReducer/selectors';
+import { createTag, deleteTag } from '../../actions/tagActions';
+import { getTagList } from '../../reducers/mainTableSettingsReducer/selectors';
 
 export const TagCreator: FC<{}> = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const checkedPositions = useSelector(getOnlyCheckedPositions);
-  const chooseColors = useSelector(getChooseColors);
+  const tagList = useSelector(getTagList);
+
+  const tagListSelected = Array.from(
+    new Set(checkedPositions.flatMap(({ tags }) => tags))
+  ).map(id => tagList[id]);
 
   const handleVisible = (value: boolean) => {
     if (checkedPositions.length) setVisible(value);
@@ -22,9 +26,16 @@ export const TagCreator: FC<{}> = () => {
   const createTagHandler = (name: string, color: string) => {
     const id = genId();
 
-    setVisible(false);
     dispatch(createTag(id, name, color));
-    dispatch(selectTag(id));
+  };
+
+  const deleteTagHandler = (id: string) => {
+    dispatch(deleteTag(id));
+  };
+
+  const setTagsHandler = (ids: string[]) => {
+    dispatch(selectTags(ids));
+    setVisible(false);
   };
 
   const PopoverContent = (
@@ -32,7 +43,10 @@ export const TagCreator: FC<{}> = () => {
       {visible && (
         <CreateTagForm
           createTag={createTagHandler}
-          chooseColors={chooseColors}
+          deleteTag={deleteTagHandler}
+          setTags={setTagsHandler}
+          tagList={tagList}
+          tagListSelected={tagListSelected}
         />
       )}
     </div>

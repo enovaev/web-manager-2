@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
 export const createTag = createAction(
-  'tableSettings/tags',
+  'tableSettings/createTag',
   (id, name, color) => ({
     payload: {
       id,
@@ -10,3 +10,5 @@ export const createTag = createAction(
     }
   })
 );
+
+export const deleteTag = createAction<string>('tableSettings/deleteTag');

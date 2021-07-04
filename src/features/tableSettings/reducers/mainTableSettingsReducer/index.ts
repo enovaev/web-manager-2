@@ -1,8 +1,9 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
-import { createTag } from '../../actions/tagActions';
+import { createTag, deleteTag } from '../../actions/tagActions';
 
-type TagType = {
+export type TagType = {
+  id: string;
   name: string;
   color: string;
 };
@@ -16,8 +17,12 @@ const initialState = {
 } as InitialStateType;
 
 export const tableSettingsReducer = createReducer(initialState, builder =>
-  builder.addCase(createTag, (state, { payload }) => {
-    const { id, name, color } = payload;
-    state.tags[id] = { name, color };
-  })
+  builder
+    .addCase(createTag, (state, { payload }) => {
+      const { id, name, color } = payload;
+      state.tags[id] = { name, color, id };
+    })
+    .addCase(deleteTag, (state, { payload }) => {
+      delete state.tags[payload];
+    })
 );

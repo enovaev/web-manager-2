@@ -2,7 +2,7 @@ export { TableFormation } from './templates/TableFormation';
 export { Input } from './components/Input';
 
 // Action
-export { selectTag } from './actions/entityActions';
+export { selectTags } from './actions/entityActions';
 
 // Reducer
 export { mainTableReducer } from './reducers/mainTableReducer';

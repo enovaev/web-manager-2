@@ -15,6 +15,7 @@
         "shared": "./src/shared",
         "styles": "./src/styles"
       }
-    }]
+    }],
+    ["import", { "libraryName": "antd", "style": true }]
   ]
 }
