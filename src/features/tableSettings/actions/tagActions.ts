@@ -11,4 +11,4 @@ export const createTag = createAction(
   })
 );
 
-export const deleteTag = createAction<string>('tableSettings/deleteTag');
+export const deleteTag = createAction<number>('tableSettings/deleteTag');

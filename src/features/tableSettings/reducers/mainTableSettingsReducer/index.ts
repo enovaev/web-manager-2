@@ -3,13 +3,13 @@ import { createReducer } from '@reduxjs/toolkit';
 import { createTag, deleteTag } from '../../actions/tagActions';
 
 export type TagType = {
-  id: string;
+  id: number;
   name: string;
   color: string;
 };
 
 interface InitialStateType {
-  tags: Record<string, TagType>;
+  tags: Record<number, TagType>;
 }
 
 const initialState = {

@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import { v4 as genId } from 'uuid';
 import { useSelector, useDispatch } from 'shared/hooks/customReduxHooks';
 import { Popover } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
@@ -7,6 +6,7 @@ import { getOnlyCheckedPositions, selectTags } from 'features/mainTable';
 import { CreateTagForm } from '../../components/CreateTagForm';
 import { createTag, deleteTag } from '../../actions/tagActions';
 import { getTagList } from '../../reducers/mainTableSettingsReducer/selectors';
+import { generateID } from '../../lib/tagHelper';
 
 export const TagCreator: FC<{}> = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -24,16 +24,17 @@ export const TagCreator: FC<{}> = () => {
   };
 
   const createTagHandler = (name: string, color: string) => {
-    const id = genId();
+    const ids = Object.keys(tagList).map(tagId => Number(tagId));
+    const newId = generateID(ids);
 
-    dispatch(createTag(id, name, color));
+    dispatch(createTag(newId, name, color));
   };
 
-  const deleteTagHandler = (id: string) => {
+  const deleteTagHandler = (id: number) => {
     dispatch(deleteTag(id));
   };
 
-  const setTagsHandler = (ids: string[]) => {
+  const setTagsHandler = (ids: number[]) => {
     dispatch(selectTags(ids));
     setVisible(false);
   };

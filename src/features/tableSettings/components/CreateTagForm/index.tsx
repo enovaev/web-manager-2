@@ -22,9 +22,9 @@ const colors = [
 
 interface CreateTagProps {
   createTag: (name: string, color: string) => void;
-  deleteTag: (id: string) => void;
-  tagList: Record<string, TagType>;
-  setTags: (ids: string[]) => void;
+  deleteTag: (id: number) => void;
+  tagList: Record<number, TagType>;
+  setTags: (ids: number[]) => void;
   tagListSelected: TagType[];
 }
 
@@ -61,7 +61,7 @@ export const CreateTagForm: FC<CreateTagProps> = ({
     }
   };
 
-  const deleteTagHandler = (id: string) => () => {
+  const deleteTagHandler = (id: number) => () => {
     deleteTag(id);
   };
 
@@ -71,7 +71,7 @@ export const CreateTagForm: FC<CreateTagProps> = ({
     if (!findTag) setSelectTags([...selectTags, tag]);
   };
 
-  const deleteFromSelectTags = (idTag: string) => () => {
+  const deleteFromSelectTags = (idTag: number) => () => {
     setSelectTags(selectTags.filter(({ id }) => id !== idTag));
   };
 

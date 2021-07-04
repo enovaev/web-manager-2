@@ -4,7 +4,7 @@ import { Tag as AntdTag } from 'antd';
 import { getTagList } from 'features/tableSettings';
 
 export interface TagsProps {
-  value: string[];
+  value: number[];
   defaultProps?: object;
 }
 
