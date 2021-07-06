@@ -18,16 +18,16 @@ export const mainTableConfig: MainTableConfigType = [
     label: 'Position name'
   },
   {
-    name: 'tags',
-    label: 'Tags'
-  },
-  {
     name: 'price',
     label: 'ExW Price'
   },
   {
     name: 'quantity',
     label: 'Quantity'
+  },
+  {
+    name: 'tags',
+    label: 'Tags'
   },
   {
     name: 'action',

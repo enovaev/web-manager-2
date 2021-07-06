@@ -20,6 +20,8 @@ module.exports = {
     }
   },
   devServer: {
+    historyApiFallback: true,
+    contentBase: './',
     compress: true,
     hot: true,
     port: 3000

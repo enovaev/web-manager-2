@@ -9,7 +9,7 @@ export const AppPages: FC<{}> = () => (
   <SidebarController>
     <Switch>
       <Route path="/auth" component={AuthRegPage} />
-      <Route path="/" exact component={HomePage} />
+      <Route component={HomePage} />
     </Switch>
   </SidebarController>
 );
