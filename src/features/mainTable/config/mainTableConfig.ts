@@ -26,6 +26,10 @@ export const mainTableConfig: MainTableConfigType = [
     label: 'Quantity'
   },
   {
+    name: 'price_end',
+    label: 'Price end'
+  },
+  {
     name: 'tags',
     label: 'Tags'
   },

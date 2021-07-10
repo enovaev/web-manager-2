@@ -1,4 +1,5 @@
 export type EntityType = {
+  id: number;
   check: boolean;
   partname: string;
   name: string;
@@ -6,6 +7,14 @@ export type EntityType = {
   quantity: string;
   price_value: string;
   price_currency: string;
+  price_end_value: string;
+  price_end_currency: string;
+  visible: boolean;
 };
 
 export type PropNamesType = keyof EntityType;
+
+export interface MainTableState {
+  list: EntityType[];
+  invalid: boolean;
+}

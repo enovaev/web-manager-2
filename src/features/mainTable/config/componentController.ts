@@ -71,5 +71,23 @@ export const componentController: ComponentControllerType = {
         propName: 'quantity'
       }
     ]
+  },
+  price_end: {
+    components: [
+      {
+        Component: Input,
+        defaultProps: {
+          isNumber: true
+        },
+        propName: 'price_end_value'
+      },
+      {
+        Component: Select,
+        defaultProps: {
+          items: currencyItems
+        },
+        propName: 'price_end_currency'
+      }
+    ]
   }
 };

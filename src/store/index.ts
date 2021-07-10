@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { mainTableReducer } from 'features/mainTable';
-import { tableSettingsReducer, tagHandler } from 'features/tableSettings';
+import { sortingHandler, addPositionHandler } from 'features/mainTable';
+import { rootReducer } from './rootReducer';
+import { InterfaceStore } from './interfaceStore';
 
-export const store = configureStore({
-  reducer: {
-    table: mainTableReducer,
-    tableSettings: tableSettingsReducer
-  },
-  middleware: [tagHandler]
-});
+export const configureAppStore = (preloadedState?: Partial<InterfaceStore>) =>
+  configureStore({
+    reducer: rootReducer,
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware().concat(sortingHandler).concat(addPositionHandler),
+    preloadedState
+  });
 
-export type RootState = ReturnType<typeof store.getState>;
+export const store = configureAppStore();
 export type AppDispatch = typeof store.dispatch;

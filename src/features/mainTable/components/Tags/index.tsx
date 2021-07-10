@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import { useSelector } from 'shared/hooks/customReduxHooks';
 import { Tag as AntdTag } from 'antd';
-import { getTagList } from 'features/tableSettings';
+import { getTagList } from 'features/tagController';
 
 export interface TagsProps {
   value: number[];

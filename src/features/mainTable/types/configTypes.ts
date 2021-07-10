@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { CheckboxProps } from '../components/Checkbox';
 import { InputProps } from '../components/Input';
-import { PropNamesType } from './reducerTypes';
+import { PropNamesType } from './interfaceState';
 import { TagsProps } from '../components/Tags';
 import { SelectProps } from '../components/Select';
 
@@ -21,6 +21,7 @@ export type TableColumnsType =
   | 'tags'
   | 'price'
   | 'quantity'
+  | 'price_end'
   | 'action';
 
 export interface ComponentEntity<T> {

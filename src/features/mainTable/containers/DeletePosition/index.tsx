@@ -4,14 +4,14 @@ import { deleteEntity } from '../../actions/entityActions';
 import styles from './styles.module.less';
 
 interface DeletePositionProps {
-  index: number;
+  id: number;
 }
 
-export const DeletePosition: FC<DeletePositionProps> = ({ index }) => {
+export const DeletePosition: FC<DeletePositionProps> = ({ id }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(deleteEntity(index));
+    dispatch(deleteEntity(id));
   };
 
   return (
