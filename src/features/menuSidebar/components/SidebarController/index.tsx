@@ -17,12 +17,10 @@ export const SidebarController: FC<PropsSidebarController> = ({ children }) => {
     <>
       <Button onClick={onOpenHandler}>Click</Button>
       <Drawer
-        // title="Main menu"
         placement="left"
         closable={false}
         onClose={onCloseHandler}
         visible={isOpen}
-        // className={styles.}
       >
         <MenuItems closeSidebar={onCloseHandler} />
       </Drawer>

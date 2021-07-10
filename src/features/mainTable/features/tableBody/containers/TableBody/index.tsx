@@ -14,7 +14,7 @@ import styles from './styles.module.less';
 
 export const TableBody: FC<{}> = () => {
   const dispatch = useDispatch();
-  const { list } = useSelector(state => state.table);
+  const { list, invalid } = useSelector(state => state.table);
 
   const changeAction = useCallback(
     (index: number, propName: string) => (value: string | boolean) => {
@@ -47,6 +47,7 @@ export const TableBody: FC<{}> = () => {
                       value={props[propName]}
                       onChange={changeAction(entityIndex, propName)}
                       defaultProps={defaultProps}
+                      invalid={invalid}
                     />
                   )
                 )}

@@ -7,4 +7,4 @@ export const LoadedPage: FC<{}> = () => (
     <TableSettings />
     <TableFormation />
   </>
-)
+);

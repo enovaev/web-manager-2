@@ -11,6 +11,7 @@ import { EntityType } from '../../types/reducerTypes';
 
 interface TableState {
   list: EntityType[];
+  invalid: boolean;
 }
 
 const initialPosition: EntityType = {
@@ -24,7 +25,8 @@ const initialPosition: EntityType = {
 };
 
 const initialState = {
-  list: [initialPosition]
+  list: [initialPosition],
+  invalid: false
 } as TableState;
 
 export const mainTableReducer = createReducer(initialState, builder => {
