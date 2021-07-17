@@ -30,6 +30,10 @@ export const mainTableConfig: MainTableConfigType = [
     label: 'Price end'
   },
   {
+    name: 'price_in',
+    label: 'Price in'
+  },
+  {
     name: 'tags',
     label: 'Tags'
   },

@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
+import { changeSettingEntity, calculatePosition } from 'features/settingsTable';
 import {
   selectTags,
   changeEntity,
@@ -16,10 +17,19 @@ const initialPosition: EntityType = {
   partname: '',
   name: '',
   quantity: '1',
-  price_value: '',
+  price_value: '300',
   price_currency: 'RUB',
   price_end_value: '',
   price_end_currency: 'RUB',
+  price_in_value: '',
+  price_in_currency: 'RUB',
+  profit_value: '',
+  profit_currency: 'RUB',
+  delivery: '0',
+  cus_house: '0',
+  nds: '0',
+  discount: '0',
+  sale: '0',
   visible: true,
   tags: []
 };
@@ -62,5 +72,17 @@ export const mainTableReducer = createReducer(initialState, builder => {
           (payload.length === 0 && item.tags.length === 0) ||
           item.tags.some(tag => payload.includes(tag))
       }));
+    })
+    .addCase(changeSettingEntity, (state, { payload }) => {
+      const { propName, value } = payload;
+
+      state.list = state.list.map(item =>
+        item.visible ? { ...item, [propName]: value } : item
+      );
+    })
+    .addCase(calculatePosition, (state, { payload }) => {
+      state.list = state.list.map(item =>
+        payload[item.id] ? { ...item, ...payload[item.id] } : item
+      );
     });
 });

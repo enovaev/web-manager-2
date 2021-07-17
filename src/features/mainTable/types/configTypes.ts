@@ -22,6 +22,7 @@ export type TableColumnsType =
   | 'price'
   | 'quantity'
   | 'price_end'
+  | 'price_in'
   | 'action';
 
 export interface ComponentEntity<T> {

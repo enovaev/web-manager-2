@@ -2,7 +2,7 @@ export { TableFormation } from './templates/TableFormation';
 export { Input } from './components/Input';
 
 // Action
-export { selectTags } from './actions/entityActions';
+export { selectTags, changeEntity } from './actions/entityActions';
 
 // Reducer
 export { mainTableReducer } from './reducers/mainTableReducer';
@@ -12,7 +12,14 @@ export { sortingHandler } from './middlewares/sortingHandler';
 export { addPositionHandler } from './middlewares/addPositionHandler';
 
 // Selector
-export { getOnlyCheckedPositions } from './reducers/mainTableReducer/selectors';
+export {
+  getOnlyCheckedPositions,
+  getSortedTableList
+} from './reducers/mainTableReducer/selectors';
 
 // Type
-export type { MainTableState } from './types/interfaceState';
+export type {
+  MainTableState,
+  PropNamesType,
+  EntityType
+} from './types/interfaceState';

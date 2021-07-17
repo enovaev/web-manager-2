@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'shared/hooks/customReduxHooks';
 import { generateID } from 'shared/lib/generateID';
-import { getTagList, getSelectedTags } from '../../reducers/mainTagReducer/selectors';
+import {
+  getTagList,
+  getSelectedTags
+} from '../../reducers/mainTagReducer/selectors';
 import { TagList } from '../../components/TagList';
 import { createTag, deleteTag, selectTag } from '../../actions/tagActions';
 
