@@ -5,8 +5,6 @@ import { RootState } from '../../../../store/rootReducer';
 import { formatDataToNumber, formatToString } from '../../lib/calculateHelper';
 import { calculatePosition } from '../../actions/calculateActions';
 
-export type CalcResult = Record<number, object>;
-
 const reactionOnChangeValue = ['price_value', 'quantity'];
 
 export const calculateHandler: Middleware<{}, RootState> =
@@ -22,21 +20,24 @@ export const calculateHandler: Middleware<{}, RootState> =
       const { list } = store.getState().table;
       const listForCalculate = list.filter(({ visible }) => visible);
 
-      const result: CalcResult = listForCalculate.reduce((acc, entity) => {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { quantity, price_value, delivery, nds, discount, sale } =
-          formatDataToNumber(entity);
+      const result: Record<number, object> = listForCalculate.reduce(
+        (acc, entity) => {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          const { quantity, price_value, delivery, nds, discount, sale } =
+            formatDataToNumber(entity);
 
-        const price = quantity * price_value;
-        const priceIn = price * delivery * nds * discount;
-        const priceEnd = price * delivery * nds * sale;
-        const profit = (priceEnd - priceIn) / priceEnd || 0;
+          const price = quantity * price_value;
+          const priceIn = price * delivery * nds * discount;
+          const priceEnd = price * delivery * nds * sale;
+          const profit = (priceEnd - priceIn) / priceEnd || 0;
 
-        return {
-          ...acc,
-          [entity.id]: formatToString(priceIn, priceEnd, profit)
-        };
-      }, {});
+          return {
+            ...acc,
+            [entity.id]: formatToString(priceIn, priceEnd, profit)
+          };
+        },
+        {}
+      );
 
       next(calculatePosition(result));
     }
