@@ -6,6 +6,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
     "dev": "cross-env NODE_ENV=development webpack serve --mode=development --hot",
+    "start": "cross-env NODE_ENV=development webpack",
     "build": "webpack --mode=development",
     "format": "prettier --write \"src/**/*.{ts,js,tsx,jsx}\"",
     "lint": "eslint --fix \"src/**/*.{ts,js,tsx,jsx}\""
