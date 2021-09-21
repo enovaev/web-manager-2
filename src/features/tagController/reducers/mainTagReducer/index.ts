@@ -1,11 +1,17 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
-import { createTag, deleteTag, selectTag } from '../../actions/tagActions';
+import {
+  createTag,
+  deleteTag,
+  selectTag,
+  selectAllTag
+} from '../../actions/tagActions';
 import { TagControllerState } from '../../types/interfaceState';
 
 const initialState = {
   list: {},
-  selected: []
+  selected: [],
+  selectAll: true
 } as TagControllerState;
 
 export const tagController = createReducer(initialState, builder =>
@@ -23,6 +29,13 @@ export const tagController = createReducer(initialState, builder =>
     .addCase(selectTag, (state, { payload }) => {
       if (state.selected.includes(payload)) {
         state.selected = state.selected.filter(id => id !== payload);
-      } else state.selected = [...state.selected, payload];
+      } else {
+        state.selected = [...state.selected, payload];
+      }
+      state.selectAll = false;
+    })
+    .addCase(selectAllTag, state => {
+      state.selected = [];
+      state.selectAll = !state.selectAll;
     })
 );

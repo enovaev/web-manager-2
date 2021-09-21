@@ -17,7 +17,12 @@ export const deleteEntity = createAction<number>('table/deleteEntity');
 
 export const selectTags = createAction<number[]>('table/selectTags');
 
-export const setVisibleForSorting = createAction<number[]>(
+interface VisibleForSortingType {
+  selected: number[];
+  selectAll: boolean;
+}
+
+export const setVisibleForSorting = createAction<VisibleForSortingType>(
   'table/setVisibleForSorting'
 );
 

@@ -66,11 +66,13 @@ export const mainTableReducer = createReducer(initialState, builder => {
       );
     })
     .addCase(setVisibleForSorting, (state, { payload }) => {
+      const { selectAll, selected } = payload;
       state.list = state.list.map(item => ({
         ...item,
         visible:
-          (payload.length === 0 && item.tags.length === 0) ||
-          item.tags.some(tag => payload.includes(tag))
+          selectAll ||
+          (!selected.length && !item.tags.length) ||
+          item.tags.some(tag => selected.includes(tag))
       }));
     })
     .addCase(changeSettingEntity, (state, { payload }) => {

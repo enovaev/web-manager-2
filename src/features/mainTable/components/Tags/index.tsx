@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import { useSelector } from 'shared/hooks/customReduxHooks';
 import { Tag as AntdTag } from 'antd';
-import { getTagList } from 'features/tagController';
+import { getTagStore } from 'features/tagController';
 
 export interface TagsProps {
   value: number[];
@@ -10,13 +10,13 @@ export interface TagsProps {
 
 export const Tags: FC<TagsProps> = memo(
   ({ value }) => {
-    const tagList = useSelector(getTagList);
+    const { list } = useSelector(getTagStore);
 
     return (
       <div>
         {value.map(id => (
-          <AntdTag color={tagList[id].color} key={id}>
-            {tagList[id].name.toUpperCase()}
+          <AntdTag color={list[id].color} key={id}>
+            {list[id].name.toUpperCase()}
           </AntdTag>
         ))}
       </div>

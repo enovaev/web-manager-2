@@ -1,20 +1,21 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'shared/hooks/customReduxHooks';
 import { generateID } from 'shared/lib/generateID';
-import {
-  getTagList,
-  getSelectedTags
-} from '../../reducers/mainTagReducer/selectors';
+import { getTagStore } from '../../reducers/mainTagReducer/selectors';
 import { TagList } from '../../components/TagList';
-import { createTag, deleteTag, selectTag } from '../../actions/tagActions';
+import {
+  createTag,
+  deleteTag,
+  selectTag,
+  selectAllTag
+} from '../../actions/tagActions';
 
 export const TagSortedTabs: FC<{}> = () => {
   const dispatch = useDispatch();
-  const tagList = useSelector(getTagList);
-  const selectedTags = useSelector(getSelectedTags);
+  const { list, selected, selectAll } = useSelector(getTagStore);
 
   const createTagHandler = (name: string, color: string) => {
-    const ids = Object.keys(tagList).map(tagId => Number(tagId));
+    const ids = Object.keys(list).map(tagId => Number(tagId));
     const newId = generateID(ids);
 
     dispatch(createTag(newId, name, color));
@@ -28,13 +29,19 @@ export const TagSortedTabs: FC<{}> = () => {
     dispatch(selectTag(id));
   };
 
+  const selectTagsAllHandler = () => {
+    dispatch(selectAllTag());
+  };
+
   return (
     <TagList
       createTag={createTagHandler}
       deleteTag={deleteTagHandler}
       selectTag={selectTagsHandler}
-      selectedTags={selectedTags}
-      tagList={tagList}
+      selectAll={selectTagsAllHandler}
+      isSelectAll={selectAll}
+      selectedTags={selected}
+      tagList={list}
     />
   );
 };

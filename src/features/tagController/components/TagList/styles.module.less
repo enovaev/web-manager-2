@@ -15,7 +15,21 @@
   border-width: 2px;
   margin-bottom: 5px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &.notSelected {
     border-color: transparent;
+  }
+
+  &.tagAllSelect {
+    background: #c6d9ef;
+    border-color: #1890ff;
+    color: #1890ff;
+
+    &.notSelected {
+      border-color: transparent;
+    }
   }
 }

@@ -26,7 +26,9 @@ interface TagListProps {
   deleteTag: (id: number) => void;
   tagList: Record<number, TagType>;
   selectTag: (id: number) => void;
+  selectAll: () => void;
   selectedTags: number[];
+  isSelectAll: boolean;
 }
 
 export const TagList: FC<TagListProps> = ({
@@ -34,6 +36,8 @@ export const TagList: FC<TagListProps> = ({
   deleteTag,
   selectTag,
   createTag,
+  selectAll,
+  isSelectAll,
   selectedTags
 }) => {
   const [nameTag, setNameTag] = useState<string>('');
@@ -81,6 +85,14 @@ export const TagList: FC<TagListProps> = ({
           {tag.name.toUpperCase()}
         </Tag>
       ))}
+      <Tag
+        className={cx(styles.tag, styles.tagAllSelect, {
+          [styles.notSelected]: !isSelectAll
+        })}
+        onClick={() => selectAll()}
+      >
+        ALL
+      </Tag>
       {visible ? (
         <Input
           type="text"

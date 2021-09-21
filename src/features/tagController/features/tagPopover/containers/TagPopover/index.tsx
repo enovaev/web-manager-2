@@ -4,18 +4,18 @@ import { Popover } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
 import { getOnlyCheckedPositions, selectTags } from 'features/mainTable';
 import { InnerPopover } from '../../components/InnerPopover';
-import { getTagList } from '../../../../reducers/mainTagReducer/selectors';
+import { getTagStore } from '../../../../reducers/mainTagReducer/selectors';
 
 export const TagPopover: FC<{}> = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const checkedPositions = useSelector(getOnlyCheckedPositions);
-  const tagList = useSelector(getTagList);
+  const { list } = useSelector(getTagStore);
 
   const tagListSelected = Array.from(
     new Set(checkedPositions.flatMap(({ tags }) => tags))
-  ).map(id => tagList[id]);
+  ).map(id => list[id]);
 
   const handleVisible = (value: boolean) => {
     if (checkedPositions.length) setVisible(value);
@@ -31,7 +31,7 @@ export const TagPopover: FC<{}> = () => {
       {visible && (
         <InnerPopover
           setTags={setTagsHandler}
-          tagList={tagList}
+          tagList={list}
           tagListSelected={tagListSelected}
         />
       )}

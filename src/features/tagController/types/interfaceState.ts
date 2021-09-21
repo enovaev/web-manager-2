@@ -7,4 +7,5 @@ export type TagType = {
 export interface TagControllerState {
   list: Record<number, TagType>;
   selected: number[];
+  selectAll: boolean;
 }

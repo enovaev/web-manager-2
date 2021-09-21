@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Radio, RadioChangeEvent } from 'antd';
-import { Link, useHistory, Switch, Route, Redirect } from 'react-router-dom';
+import { Radio, RadioChangeEvent, Row } from 'antd';
+import { useHistory, Switch, Route, Redirect } from 'react-router-dom';
 import { LoadedPage } from './LoadedPage';
 import styles from './styles.module.less';
 
@@ -20,15 +20,15 @@ export const HomePage: FC<{}> = () => {
 
   return (
     <div className={styles.homePage}>
-      Home page
-      <Link to="/auth">click</Link>
-      <Radio.Group
-        options={optionsWithDisabled}
-        onChange={changeRoute}
-        value={history.location.pathname}
-        optionType="button"
-        buttonStyle="solid"
-      />
+      <Row justify="center">
+        <Radio.Group
+          options={optionsWithDisabled}
+          onChange={changeRoute}
+          value={history.location.pathname}
+          optionType="button"
+          buttonStyle="solid"
+        />
+      </Row>
       <Switch>
         <Route path="/loader" component={LoadedPage} />
         <Route
