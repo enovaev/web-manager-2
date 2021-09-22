@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Popover } from 'antd';
 import { DollarOutlined } from '@ant-design/icons';
+import { CurrencyForm } from '../../components/CurrencyForm';
 
 export const CurrencyPopover: FC<{}> = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -15,7 +16,7 @@ export const CurrencyPopover: FC<{}> = () => {
       onVisibleChange={handleVisible}
       placement="bottomLeft"
       trigger="click"
-      content={<div>поповер</div>}
+      content={<CurrencyForm />}
     >
       <DollarOutlined />
     </Popover>

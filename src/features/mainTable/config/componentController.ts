@@ -1,8 +1,8 @@
+import { currencyItems } from 'features/currencyForm';
 import { Checkbox } from '../components/Checkbox';
 import { Input } from '../components/Input';
 import { Tags } from '../components/Tags';
 import { Select } from '../components/Select';
-import { currencyItems } from './SelectConfig';
 import { ComponentControllerType } from '../types/configTypes';
 
 export const componentController: ComponentControllerType = {

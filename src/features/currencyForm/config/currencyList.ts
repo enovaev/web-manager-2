@@ -1,6 +1,8 @@
+export type CurrencyValues = 'RUB' | 'USD' | 'EUR' | 'GBP' | 'CHF' | 'BYN';
+
 export interface CurrencyItemType {
   name: string;
-  value: string;
+  value: CurrencyValues;
 }
 
 export const currencyItems: CurrencyItemType[] = [

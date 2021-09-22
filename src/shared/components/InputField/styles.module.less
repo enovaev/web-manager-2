@@ -1,24 +1,24 @@
 @import "src/styles/colors";
 
-.inputFieldContainer {
-  .isErrorInput {
-    border-color: @danger-red;
+
+.isErrorInput {
+  border-color: @danger-red;
+}
+
+.errorMessage {
+  height: 0;
+  opacity: 0;
+  transition: all ease-in-out .2s;
+
+  .textError {
+    font-size: 10px;
+    line-height: normal;
+    white-space: nowrap;
   }
 
-  .errorMessage {
-    height: 0;
-    opacity: 0;
-    transition: all ease-in-out .2s;
-
-    .textError {
-      font-size: 10px;
-      line-height: normal;
-      white-space: nowrap;
-    }
-
-    &.isShow {
-      opacity: 1;
-      height: 12px;
-    }
+  &.isShow {
+    opacity: 1;
+    height: 12px;
   }
 }
+

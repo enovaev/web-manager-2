@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Select as AntdSelect } from 'antd';
-import { CurrencyItemType } from '../../config/SelectConfig';
+import { CurrencyItemType } from 'features/currencyForm/config/currencyList';
 
 const { Option } = AntdSelect;
 
