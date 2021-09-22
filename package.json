@@ -6,8 +6,8 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
     "dev": "cross-env NODE_ENV=development webpack serve --mode=development --hot",
-    "start": "cross-env NODE_ENV=development webpack",
-    "build": "webpack --mode=development",
+    "start": "serve -s build",
+    "build": "webpack --mode=production",
     "format": "prettier --write \"src/**/*.{ts,js,tsx,jsx}\"",
     "lint": "eslint --fix \"src/**/*.{ts,js,tsx,jsx}\""
   },
@@ -73,6 +73,7 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.0",
     "reselect": "^4.0.0",
+    "serve": "^12.0.1",
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
   }
