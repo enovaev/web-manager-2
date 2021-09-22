@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { Radio, RadioChangeEvent, Row } from 'antd';
+import { Button, Radio, RadioChangeEvent, Row} from 'antd';
 import { useHistory, Switch, Route, Redirect } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { LoadedPage } from './LoadedPage';
 import styles from './styles.module.less';
 
@@ -18,8 +19,16 @@ export const HomePage: FC<{}> = () => {
     history.push(target.value);
   };
 
+  const logout = () => {
+    Cookies.remove('auth');
+    history.push('/auth');
+  };
+
   return (
     <div className={styles.homePage}>
+      <Row justify="end">
+        <Button onClick={logout}>Выйти</Button>
+      </Row>
       <Row justify="center">
         <Radio.Group
           options={optionsWithDisabled}

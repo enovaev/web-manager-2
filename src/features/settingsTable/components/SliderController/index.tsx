@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { Row } from 'antd';
 import { Input } from 'features/mainTable';
 import { Slider } from '../Slider';
-import styles from './styles.module.less';
 
 interface SliderControllerProps {
   value: string;
@@ -19,15 +19,17 @@ export const SliderController: FC<SliderControllerProps> = ({
   max
 }) => {
   return (
-    <div className={styles.wrapper}>
-      {label}
-      <Input
-        onChange={onChange}
-        value={value}
-        invalid={false}
-        defaultProps={{ isNumber: true, maxWidth: 50 }}
-      />
+    <>
+      <Row justify="center">{label}</Row>
+      <Row justify="center">
+        <Input
+          onChange={onChange}
+          value={value}
+          invalid={false}
+          defaultProps={{ isNumber: true, maxWidth: 50 }}
+        />
+      </Row>
       <Slider value={value} onChange={onChange} min={min} max={max} />
-    </div>
+    </>
   );
 };

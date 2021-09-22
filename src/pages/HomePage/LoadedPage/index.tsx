@@ -2,21 +2,21 @@ import React, { FC } from 'react';
 import { TableFormation } from 'features/mainTable';
 import { TagSortedTabs, TagPopover } from 'features/tagController';
 import { SettingsSidebar } from 'features/settingsTable';
-import { Row } from 'antd';
+import { Row, Col } from 'antd';
 
 export const LoadedPage: FC<{}> = () => (
-  <>
-    <Row justify="end">
-      <SettingsSidebar />
-    </Row>
-    <Row>
-      <TagPopover />
-    </Row>
-    <Row>
+  <Row gutter={[0, 10]}>
+    <Col span={24}>
+      <Row justify="space-between" align="middle">
+        <TagPopover />
+        <SettingsSidebar />
+      </Row>
+    </Col>
+    <Col span={24}>
       <TagSortedTabs />
-    </Row>
-    <Row>
+    </Col>
+    <Col span={24}>
       <TableFormation />
-    </Row>
-  </>
+    </Col>
+  </Row>
 );
