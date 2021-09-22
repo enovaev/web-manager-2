@@ -10,6 +10,7 @@ export const sortingHandler: Middleware<{}, RootState> =
     next(action);
     if (actions.some(a => a.match(action))) {
       const { selected, selectAll } = store.getState().tags;
+
       store.dispatch(setVisibleForSorting({ selected, selectAll }));
     }
   };

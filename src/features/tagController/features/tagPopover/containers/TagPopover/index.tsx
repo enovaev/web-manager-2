@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useSelector, useDispatch } from 'shared/hooks/customReduxHooks';
 import { Popover } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
-import { getOnlyCheckedPositions, selectTags } from 'features/mainTable';
+import { getOnlyCheckedPositions, assignTags } from 'features/mainTable';
 import { InnerPopover } from '../../components/InnerPopover';
 import { getTagStore } from '../../../../reducers/mainTagReducer/selectors';
 
@@ -22,7 +22,7 @@ export const TagPopover: FC<{}> = () => {
   };
 
   const setTagsHandler = (ids: number[]) => {
-    dispatch(selectTags(ids));
+    dispatch(assignTags(ids));
     setVisible(false);
   };
 

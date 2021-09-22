@@ -8,6 +8,9 @@ export { selectTag, selectAllTag } from './actions/tagActions';
 // Reducer
 export { tagController } from './reducers/mainTagReducer';
 
+// Middleware
+export { tagHandler } from './middleware/tagHandler';
+
 // Selector
 export { getTagStore } from './reducers/mainTagReducer/selectors';
 

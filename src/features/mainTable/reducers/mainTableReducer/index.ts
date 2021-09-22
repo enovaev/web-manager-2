@@ -2,10 +2,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeSettingEntity, calculatePosition } from 'features/settingsTable';
 import {
-  selectTags,
+  assignTags,
   changeEntity,
   deleteEntity,
   checkAllEntities,
+  deletePositionTag,
   addPositionPrepared,
   setVisibleForSorting
 } from '../../actions/entityActions';
@@ -60,11 +61,6 @@ export const mainTableReducer = createReducer(initialState, builder => {
     .addCase(deleteEntity, (state, { payload }) => {
       state.list = state.list.filter(({ id }) => id !== payload);
     })
-    .addCase(selectTags, (state, { payload }) => {
-      state.list = state.list.map(pos =>
-        pos.check ? { ...pos, tags: payload } : pos
-      );
-    })
     .addCase(setVisibleForSorting, (state, { payload }) => {
       const { selectAll, selected } = payload;
       state.list = state.list.map(item => ({
@@ -86,5 +82,16 @@ export const mainTableReducer = createReducer(initialState, builder => {
       state.list = state.list.map(item =>
         payload[item.id] ? { ...item, ...payload[item.id] } : item
       );
+    })
+    .addCase(assignTags, (state, { payload }) => {
+      state.list = state.list.map(pos =>
+        pos.check ? { ...pos, tags: payload } : pos
+      );
+    })
+    .addCase(deletePositionTag, (state, { payload }) => {
+      state.list = state.list.map(pos => ({
+        ...pos,
+        tags: pos.tags.filter(id => id !== payload)
+      }));
     });
 });

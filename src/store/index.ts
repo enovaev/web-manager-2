@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { sortingHandler, addPositionHandler } from 'features/mainTable';
 import { calculateHandler } from 'features/settingsTable';
+import { tagHandler } from 'features/tagController';
 import { rootReducer } from './rootReducer';
 import { InterfaceStore } from './interfaceStore';
 
@@ -11,7 +12,8 @@ export const configureAppStore = (preloadedState?: Partial<InterfaceStore>) =>
       getDefaultMiddleware().concat(
         sortingHandler,
         addPositionHandler,
-        calculateHandler
+        calculateHandler,
+        tagHandler
       ),
     preloadedState
   });
