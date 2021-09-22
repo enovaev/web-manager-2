@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button, Radio, RadioChangeEvent, Row} from 'antd';
+import { Button, Radio, RadioChangeEvent, Row } from 'antd';
 import { useHistory, Switch, Route, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { LoadedPage } from './LoadedPage';

@@ -1,17 +1,16 @@
 import React, { FC } from 'react';
-import { Input, Typography, InputProps } from 'antd';
+import cx from 'classnames';
+import { Input, Typography, Row, InputProps } from 'antd';
 
 import styles from './styles.module.less';
 
 interface InputFieldProps extends InputProps {
   errorMessage?: string | undefined;
-  classes?: string;
   password?: boolean;
 }
 
 export const InputField: FC<InputFieldProps> = ({
   errorMessage,
-  classes,
   password,
   ...props
 }) => {
@@ -19,10 +18,17 @@ export const InputField: FC<InputFieldProps> = ({
 
   return (
     <div className={styles.inputFieldContainer}>
-      <InputComponent className={classes} {...props} />
-      <Typography.Text className={styles.errorMessage} type="danger">
-        {errorMessage}
-      </Typography.Text>
+      <InputComponent
+        className={cx({ [styles.isErrorInput]: errorMessage })}
+        {...props}
+      />
+      <Row
+        className={cx(styles.errorMessage, { [styles.isShow]: errorMessage })}
+      >
+        <Typography.Text className={cx(styles.textError)} type="danger">
+          {errorMessage}
+        </Typography.Text>
+      </Row>
     </div>
   );
 };

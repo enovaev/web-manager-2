@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
+import { Row, Col, Button, message } from 'antd';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Button, message } from 'antd';
 import { InputField } from 'shared/components/InputField';
 
 import styles from './styles.module.less';
@@ -46,36 +46,42 @@ export const AuthMainForm: FC<{}> = () => {
 
   return (
     <form className={styles.formWrapper} onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="login"
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <InputField
-            classes={styles.fieldForm}
-            placeholder="login"
-            errorMessage={errors.login?.message}
-            {...field}
+      <Row gutter={[0, 10]}>
+        <Col span={24}>
+          <Controller
+            name="login"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <InputField
+                placeholder="login"
+                errorMessage={errors.login?.message}
+                {...field}
+              />
+            )}
           />
-        )}
-      />
-      <Controller
-        name="password"
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <InputField
-            className={styles.fieldForm}
-            placeholder="password"
-            password
-            errorMessage={errors.password?.message}
-            {...field}
+        </Col>
+        <Col span={24}>
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <InputField
+                placeholder="password"
+                password
+                errorMessage={errors.password?.message}
+                {...field}
+              />
+            )}
           />
-        )}
-      />
-      <Button className={styles.submitButton} type="primary" htmlType="submit">
-        Войти
-      </Button>
+        </Col>
+        <Col span={24}>
+          <Button type="primary" htmlType="submit">
+            Войти
+          </Button>
+        </Col>
+      </Row>
     </form>
   );
 };
