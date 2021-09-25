@@ -46,7 +46,7 @@ export const TagPopover: FC<{}> = () => {
       trigger="click"
       content={PopoverContent}
     >
-      <TagOutlined />
+      <TagOutlined style={{ fontSize: '18px' }} />
     </Popover>
   );
 };

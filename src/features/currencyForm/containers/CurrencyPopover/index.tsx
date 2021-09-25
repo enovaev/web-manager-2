@@ -36,7 +36,7 @@ export const CurrencyPopover: FC<{}> = () => {
         />
       }
     >
-      <DollarOutlined />
+      <DollarOutlined style={{ fontSize: '18px' }} />
     </Popover>
   );
 };

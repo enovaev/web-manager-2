@@ -22,6 +22,11 @@ export const formatToString = (
   profit_value: profit.toFixed(2)
 });
 
-// export const currencyConvert = (value: number, initialCurrency: string, finalCurrency: string) => {
-//
-// }
+export const currencyConvert = (
+  value: number,
+  initialCurrency: string | undefined,
+  finalCurrency: string | undefined
+): number =>
+  initialCurrency && finalCurrency
+    ? (Number(initialCurrency) * value) / Number(finalCurrency)
+    : value;
