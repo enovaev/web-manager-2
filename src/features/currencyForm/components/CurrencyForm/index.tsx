@@ -1,35 +1,45 @@
 import React, { FC } from 'react';
 import { Button, Col, Row, Typography } from 'antd';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { currencyItems, CurrencyValues } from '../../config/currencyList';
+import { currencyItems } from '../../config/currencyList';
+import { CurrencyListForSubmit } from '../../types/intefaceState';
 import { InputField } from '../../../../shared/components/InputField';
 import styles from './styles.module.less';
 
-type FormInterface = {
-  [Property in CurrencyValues]: string;
-};
+interface CurrencyFormProps {
+  onClose: (v: boolean) => void;
+  submitForm: (data: CurrencyListForSubmit) => void;
+  initialCurrency: CurrencyListForSubmit;
+}
 
-const schema = yup.object().shape(
-  currencyItems.reduce((acc, { value }) => {
-    // @ts-ignore
-    acc[value] = yup.string().required('Обязательное поле');
+const prepareData = (data: CurrencyListForSubmit) =>
+  Object.entries(data).reduce((acc, [key, value]) => {
+    if (value) {
+      // @ts-ignore
+      acc[key] = value;
+    }
     return acc;
-  }, {})
+  }, {});
+
+const prepareCurrencyItems = currencyItems.filter(
+  ({ value }) => value !== 'RUB'
 );
 
-export const CurrencyForm: FC<{}> = () => {
+export const CurrencyForm: FC<CurrencyFormProps> = ({
+  onClose,
+  submitForm,
+  initialCurrency: { RUB, ...otherCurrency }
+}) => {
   const {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormInterface>({
-    resolver: yupResolver(schema)
+  } = useForm<CurrencyListForSubmit>({
+    defaultValues: otherCurrency
   });
-
-  const onSubmit: SubmitHandler<FormInterface> = data => {
-    console.log(data);
+  const onSubmit: SubmitHandler<CurrencyListForSubmit> = data => {
+    submitForm(prepareData(data));
+    onClose(false);
   };
 
   return (
@@ -38,7 +48,7 @@ export const CurrencyForm: FC<{}> = () => {
         <Col span={24}>
           <Typography.Text strong>Задать валюты:</Typography.Text>
         </Col>
-        {currencyItems.map(({ name, value }) => (
+        {prepareCurrencyItems.map(({ name, value }) => (
           <Col span={24}>
             <Controller
               name={value}
@@ -60,6 +70,16 @@ export const CurrencyForm: FC<{}> = () => {
             Сохранить
           </Button>
         </Col>
+        {/* <Button */}
+        {/*  onClick={() => { */}
+        {/*    const blob = new Blob(['test text'], { */}
+        {/*      type: 'text/plain;charset=utf-8' */}
+        {/*    }); */}
+        {/*    FileSaver.saveAs(blob, 'testfile1.txt'); */}
+        {/*  }} */}
+        {/* > */}
+        {/*  Test */}
+        {/* </Button> */}
       </Row>
     </form>
   );

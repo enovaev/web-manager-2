@@ -31,6 +31,8 @@ export const calculateHandler: Middleware<{}, RootState> =
           const priceEnd = price * delivery * nds * sale;
           const profit = (priceEnd - priceIn) / priceEnd || 0;
 
+          // const priceInConvert = currencyConvert(priceIn);
+
           return {
             ...acc,
             [entity.id]: formatToString(priceIn, priceEnd, profit)

@@ -21,3 +21,7 @@ export const formatToString = (
   price_end_value: priceEnd.toFixed(2),
   profit_value: profit.toFixed(2)
 });
+
+// export const currencyConvert = (value: number, initialCurrency: string, finalCurrency: string) => {
+//
+// }
