@@ -10,6 +10,7 @@ export interface EntitySpecType {
 export interface GroupSpecType {
   id: number;
   isGroup: true;
+  dragged: boolean;
   group_name: string;
   entities: EntitySpecType[];
 }

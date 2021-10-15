@@ -1,15 +1,16 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
 import { addPositionPrepared } from 'features/mainTable/actions/entityActions';
-import { changeSpecEntity, createGroup } from '../../actions';
+import { changeSpecEntity, createGroup, swapElements } from '../../actions';
 import { SpecTableState, EntitySpecType } from '../../types/interfaceState';
 import {
   changeValueFromList,
-  filterCheckedList
+  filterCheckedList,
+  findElements
 } from '../../lib/reducerHelper';
 
 const initialEntitySpec: Omit<EntitySpecType, 'id'> = {
-  dragged: true,
+  dragged: false,
   spec_name_first: '',
   spec_name_second: '',
   check: false,
@@ -48,10 +49,27 @@ export const specificationTable = createReducer(initialState, builder => {
         {
           id: Math.random(),
           isGroup: true,
+          dragged: false,
           group_name: payload,
           entities: checkedList
         },
         ...updated
       ];
+    })
+    .addCase(swapElements, (state, { payload }) => {
+      const [from, to] = findElements(state.list, payload);
+      // console.log(from, to);
+
+      if (from && to) {
+        state.list = state.list.map(item => {
+          if (item.id === from.id) {
+            return to;
+          }
+          if (item.id === to.id) {
+            return from;
+          }
+          return item;
+        });
+      }
     });
 });

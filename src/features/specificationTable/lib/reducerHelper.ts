@@ -44,3 +44,22 @@ export const filterCheckedList = <T extends SpecEntityType>(
 
   return [result, withChecked];
 };
+
+export const findElements = <T extends SpecEntityType>(
+  list: T[],
+  id: number
+): (EntitySpecType | null)[] => {
+  let from = null;
+  let to = null;
+
+  list.forEach(item => {
+    if (item.dragged) {
+      from = item;
+    }
+    if (!item.isGroup && id === item.id) {
+      to = item;
+    }
+  });
+
+  return [from, to];
+};
