@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { mainTableConfig } from '../../../../config/mainTableConfig';
 import {
   componentMap,
   HeaderComponentMapType
@@ -7,11 +6,21 @@ import {
 
 import styles from './styles.module.less';
 
-export const TableHeader: FC<{}> = () => {
+interface ConfigItemType {
+  name: string;
+  label?: string;
+  componentName?: string;
+}
+
+interface TableHeaderProps {
+  tableConfig: ConfigItemType[];
+}
+
+export const TableHeader: FC<TableHeaderProps> = ({ tableConfig }) => {
   return (
     <thead>
       <tr className={styles.headerRow}>
-        {mainTableConfig.map(({ name, label, componentName }) => {
+        {tableConfig.map(({ name, label, componentName }) => {
           const Component =
             componentName &&
             componentMap[componentName as HeaderComponentMapType];

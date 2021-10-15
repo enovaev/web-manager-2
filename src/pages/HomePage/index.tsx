@@ -3,6 +3,7 @@ import { Button, Radio, RadioChangeEvent, Row } from 'antd';
 import { useHistory, Switch, Route, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { LoadedPage } from './LoadedPage';
+import { SpecificationPage } from './SpecificationPage';
 import styles from './styles.module.less';
 
 const optionsWithDisabled = [
@@ -44,10 +45,7 @@ export const HomePage: FC<{}> = () => {
           path="/calculate"
           component={() => <div>Страница расчета</div>}
         />
-        <Route
-          path="/specification"
-          component={() => <div>Страница спецификации</div>}
-        />
+        <Route path="/specification" component={SpecificationPage} />
         <Redirect exact from="/" to="/loader" />
       </Switch>
     </div>

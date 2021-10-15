@@ -8,10 +8,10 @@ export const addPositionHandler: Middleware<{}, RootState> =
     if (addPosition.match(action)) {
       const { table, tags } = store.getState();
       return next(
-        addPositionPrepared(
-          generateID(table.list.map(({ id }) => id)),
-          tags.selected
-        )
+        addPositionPrepared({
+          id: generateID(table.list.map(({ id }) => id)),
+          tags: tags.selected
+        })
       );
     }
     return next(action);

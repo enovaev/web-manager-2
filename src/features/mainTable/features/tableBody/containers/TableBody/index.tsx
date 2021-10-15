@@ -6,10 +6,7 @@ import { componentController } from '../../../../config/componentController';
 import { DeletePosition } from '../../../../containers/DeletePosition';
 import { getSortedTableList } from '../../../../reducers/mainTableReducer/selectors';
 import { changeEntity } from '../../../../actions/entityActions';
-import {
-  ComponentEntity,
-  ComponentsProps
-} from '../../../../types/configTypes';
+import { ComponentControllerType } from '../../../../types/configTypes';
 
 import styles from './styles.module.less';
 
@@ -37,21 +34,18 @@ export const TableBody: FC<{}> = () => {
           {mainTableConfig.map(({ name }) => (
             <td key={name}>
               <div className={styles.componentWrapper}>
-                {componentController[name]?.components?.map(
-                  ({
-                    Component,
-                    defaultProps,
-                    propName
-                  }: ComponentEntity<ComponentsProps>) => (
+                {name in componentController &&
+                  componentController[
+                    name as keyof ComponentControllerType
+                  ].components.map(({ Component, defaultProps, propName }) => (
                     <Component
                       key={propName}
-                      value={props[propName] as any} // TODO
+                      value={props[propName] as any}
                       onChange={changeAction(props.id, propName)}
                       defaultProps={defaultProps}
                       invalid={invalid}
                     />
-                  )
-                )}
+                  ))}
                 {name === 'action' && <DeletePosition id={props.id} />}
                 {name === 'number' && entityIndex + 1}
               </div>

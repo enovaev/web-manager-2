@@ -1,5 +1,6 @@
 export { TableFormation } from './templates/TableFormation';
 export { Input } from './components/Input';
+export { TableHeader } from './features/tableHeader';
 
 // Action
 export {

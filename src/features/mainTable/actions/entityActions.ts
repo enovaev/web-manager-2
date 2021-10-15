@@ -15,7 +15,7 @@ export const deleteEntity = createAction<number>('table/deleteEntity');
 export const addPosition = createAction('table/addPosition');
 export const addPositionPrepared = createAction(
   'table/addPositionPrepared',
-  (id, tags) => ({ payload: { id, tags } })
+  ({ id, tags }) => ({ payload: { id, tags } })
 );
 
 interface VisibleForSortingType {

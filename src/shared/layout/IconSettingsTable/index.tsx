@@ -1,13 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, FunctionComponent } from 'react';
 import { Row, Space } from 'antd';
 import { CurrencyPopover } from 'features/currencyForm';
+import { GroupCreatorPopover } from 'features/specificationTable/features/groupCreator';
 import { TagPopover } from 'features/tagController';
+import { tableTypes, TableTypes } from 'shared/config/tableTypes';
 
-export const IconSettingsTable: FC<{}> = () => (
+const mapComponents: Record<TableTypes, FunctionComponent[]> = {
+  [tableTypes.mainTable]: [TagPopover, CurrencyPopover],
+  [tableTypes.specTable]: [GroupCreatorPopover]
+};
+
+interface IconSettingsTableProps {
+  type: TableTypes;
+}
+
+export const IconSettingsTable: FC<IconSettingsTableProps> = ({ type }) => (
   <Row>
     <Space>
-      <TagPopover />
-      <CurrencyPopover />
+      {mapComponents[type].map(Component => (
+        <Component />
+      ))}
     </Space>
   </Row>
 );
