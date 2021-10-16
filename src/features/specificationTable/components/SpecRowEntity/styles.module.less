@@ -1,10 +1,22 @@
-.rowContainer {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  padding: 10px;
+.tableRow {
+  border-bottom: 1px solid #f0f0f0;
 
-  .nameWrapper {
+  &:hover {
+    background-color: rgb(250, 250, 250);
+  }
+
+  .rowContainer {
     display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 10px;
+
+    .nameWrapper {
+      display: flex;
+    }
+  }
+
+  .emptyRow {
+    height: 52px;
   }
 }

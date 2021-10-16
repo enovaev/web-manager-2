@@ -1,30 +1,39 @@
-import React, { useState, FC } from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'shared/hooks/customReduxHooks';
 import { MenuOutlined } from '@ant-design/icons';
 import { Checkbox } from 'features/mainTable/components/Checkbox';
 import { MergedEntityType } from '../../reducer/specificationTable/selectors';
-import { changeSpecEntity, swapElements } from '../../actions';
+import { changeSpecEntity } from '../../actions';
 import { mainSpecTableConfig } from '../../config/mainSpecTableConfig';
 import { Input } from '../../../mainTable';
+import { useDragAndDrop } from '../../hooks/useDragAndDrop';
 import styles from './styles.module.less';
 
 interface SpecRowEntityProps {
   entityProps: MergedEntityType;
-  index: string;
+  index: number;
+  indexGroup?: number;
 }
 
 const propNameMap = {
   check: 'check',
   specNameFirst: 'spec_name_first',
-  specNameSecond: 'spec_name_second',
-  dragged: 'dragged'
+  specNameSecond: 'spec_name_second'
 };
+
+const getNumberPosition = (
+  index: number,
+  groupIndex: number | undefined
+): string =>
+  typeof groupIndex === 'number'
+    ? `${index + 1}.${groupIndex + 1}`
+    : (index + 1).toString();
 
 export const SpecRowEntity: FC<SpecRowEntityProps> = ({
   entityProps,
-  index
+  index,
+  indexGroup
 }) => {
-  const [draggable, setDraggable] = useState(false);
   const dispatch = useDispatch();
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { id, name, spec_name_first, spec_name_second, check, dragged } =
@@ -34,37 +43,18 @@ export const SpecRowEntity: FC<SpecRowEntityProps> = ({
     dispatch(changeSpecEntity(id, propName, value));
   };
 
-  const onDragStart = () => {
-    setTimeout(() => {
-      dispatch(changeSpecEntity(id, propNameMap.dragged, true));
-    }, 200);
-  };
-
-  const onDragEnd = () => {
-    setDraggable(false);
-    dispatch(changeSpecEntity(id, propNameMap.dragged, false));
-  };
-
-  const onDragOver = () => {
-    if (!dragged && !draggable) {
-      dispatch(swapElements(id));
-    }
-  };
+  const { onDraggableHandler, ...rest } = useDragAndDrop(id, dragged);
 
   return (
-    <div
-      draggable={draggable}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-      onDragOver={onDragOver}
-    >
+    <tr className={styles.tableRow} {...rest}>
       {mainSpecTableConfig.map(({ name: positionName }) => (
         <td>
           {dragged ? (
-            <div style={{ height: 52 }} />
+            <div className={styles.emptyRow} />
           ) : (
             <div className={styles.rowContainer}>
-              {positionName === 'number' && index}
+              {positionName === 'number' &&
+                getNumberPosition(index, indexGroup)}
               {positionName === 'name' && (
                 <div className={styles.nameWrapper}>
                   <Input
@@ -80,7 +70,7 @@ export const SpecRowEntity: FC<SpecRowEntityProps> = ({
                 </div>
               )}
               {positionName === 'drag' && (
-                <MenuOutlined onMouseDown={() => setDraggable(true)} />
+                <MenuOutlined onMouseDown={onDraggableHandler} />
               )}
               {positionName === 'check' && (
                 <Checkbox
@@ -92,6 +82,6 @@ export const SpecRowEntity: FC<SpecRowEntityProps> = ({
           )}
         </td>
       ))}
-    </div>
+    </tr>
   );
 };
