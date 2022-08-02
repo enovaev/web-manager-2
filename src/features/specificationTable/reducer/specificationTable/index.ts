@@ -1,12 +1,17 @@
 /* eslint-disable no-return-assign, no-param-reassign */
 import { createReducer } from '@reduxjs/toolkit';
 import { addPositionPrepared } from 'features/mainTable/actions/entityActions';
-import { changeSpecEntity, createGroup, swapElements } from '../../actions';
+import {
+  changeSpecEntity,
+  createGroup,
+  swapElements,
+  removeFromList,
+  addToList
+} from '../../actions';
 import { SpecTableState, EntitySpecType } from '../../types/interfaceState';
 import {
   changeValueFromList,
-  filterCheckedList,
-  findElements
+  filterCheckedList
 } from '../../lib/reducerHelper';
 
 const initialEntitySpec: Omit<EntitySpecType, 'id'> = {
@@ -57,19 +62,43 @@ export const specificationTable = createReducer(initialState, builder => {
       ];
     })
     .addCase(swapElements, (state, { payload }) => {
-      const [from, to] = findElements(state.list, payload);
-      // console.log(from, to);
+      const { from, to } = payload;
 
-      if (from && to) {
-        state.list = state.list.map(item => {
-          if (item.id === from.id) {
-            return to;
-          }
-          if (item.id === to.id) {
-            return from;
-          }
-          return item;
-        });
+      if (from.index2 !== null && to.index2 !== null) {
+        state.list[from.index2].entities[from.index] = to.value;
+        state.list[to.index2].entities[to.index] = from.value;
+      } else {
+        state.list[from.index] = to.value;
+        state.list[to.index] = from.value;
+      }
+    })
+    .addCase(removeFromList, (state, { payload }) => {
+      state.list = state.list.reduce<SpecTableState['list']>((acc, item) => {
+        if (item.id === payload) return acc;
+
+        if (item.isGroup) {
+          acc.push({
+            ...item,
+            entities: item.entities.filter(i => i.id !== payload)
+          });
+          return acc;
+        }
+
+        acc.push(item);
+        return acc;
+      }, []);
+    })
+    .addCase(addToList, (state, { payload }) => {
+      const { value, index, index2 } = payload;
+
+      if (index2 !== null) {
+        const copy = { ...state.list[index2] };
+        copy.entities.splice(index, 0, value);
+        state.list[index2] = copy;
+      } else {
+        const copy = [...state.list];
+        copy.splice(index, 0, value);
+        state.list = copy;
       }
     });
 });

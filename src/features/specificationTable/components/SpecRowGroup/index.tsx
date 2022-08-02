@@ -17,7 +17,7 @@ export const SpecRowGroup: FC<SpecRowEntityProps> = ({
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { group_name, id, dragged } = entityProps;
 
-  const { onDraggableHandler, ...rest } = useDragAndDrop(id, dragged);
+  const { onDraggableHandler, ...rest } = useDragAndDrop(id, dragged, true);
 
   return (
     <tr className={styles.tableRow} {...rest}>

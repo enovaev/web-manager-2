@@ -11,22 +11,21 @@ export const changeValueFromList = <T extends SpecEntityType>(
   payload: PayloadType
 ): SpecEntityType[] =>
   list.map(item => {
-    if (item.isGroup) {
-      const entities = changeValueFromList(item.entities, payload);
+    const entities =
+      item.isGroup && changeValueFromList(item.entities, payload);
 
-      return {
-        ...item,
-        entities
-      };
-    }
+    const result = {
+      ...item,
+      ...(entities && { entities })
+    };
 
     if (item.id === payload.id) {
       return {
-        ...item,
+        ...result,
         [payload.propName]: payload.value
       };
     }
-    return item;
+    return result;
   });
 
 export const filterCheckedList = <T extends SpecEntityType>(
@@ -43,23 +42,4 @@ export const filterCheckedList = <T extends SpecEntityType>(
   });
 
   return [result, withChecked];
-};
-
-export const findElements = <T extends SpecEntityType>(
-  list: T[],
-  id: number
-): (EntitySpecType | null)[] => {
-  let from = null;
-  let to = null;
-
-  list.forEach(item => {
-    if (item.dragged) {
-      from = item;
-    }
-    if (!item.isGroup && id === item.id) {
-      to = item;
-    }
-  });
-
-  return [from, to];
 };

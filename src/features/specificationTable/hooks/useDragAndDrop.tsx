@@ -1,10 +1,14 @@
 import { DragEvent, useState } from 'react';
 import { useDispatch } from 'shared/hooks/customReduxHooks';
-import { changeSpecEntity, swapElements } from '../actions';
+import { changeSpecEntity, dropAction } from '../actions';
 
 const DRAGGED = 'dragged';
 
-export const useDragAndDrop = (id: number, dragged: boolean) => {
+export const useDragAndDrop = (
+  id: number,
+  dragged: boolean,
+  isGroupItem: boolean = false
+) => {
   const [draggable, setDraggable] = useState(false);
   const dispatch = useDispatch();
 
@@ -22,7 +26,7 @@ export const useDragAndDrop = (id: number, dragged: boolean) => {
   const onDragOver = (e: DragEvent) => {
     e.preventDefault();
     if (!dragged && !draggable) {
-      dispatch(swapElements(id));
+      dispatch(dropAction(id, isGroupItem));
     }
   };
 
